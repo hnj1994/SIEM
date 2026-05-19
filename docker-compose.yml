@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  soc-dashboard:
+    build: .
+    container_name: soc-nexus-frontend
+    ports:
+      - "3000:80"
+    environment:
+      - VITE_WAZUH_API_URL=https://10.0.0.4:55000
+      - VITE_OLLAMA_API_URL=http://10.0.0.4:11434
+      - VITE_OLLAMA_MODEL=llama3
+      - VITE_USE_MOCK_DATA=false
+    restart: unless-stopped
+    networks:
+      - soc-network
+
+networks:
+  soc-network:
+    driver: bridge
