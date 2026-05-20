@@ -46,7 +46,7 @@ export async function* streamOllamaChat(
   });
 
   if (!response.ok) {
-    throw new Error(`Ollama API error: ${response.status}`);
+    throw new Error(`Ollama API error: ${response.status} - ${response.statusText}. Server at http://4.188.228.167:11434 may be unavailable.`);
   }
 
   const reader = response.body!.getReader();
@@ -74,7 +74,7 @@ export async function explainAlert(alertJson: string): Promise<string> {
   const messages: OllamaMessage[] = [
     {
       role: 'user',
-      content: `Analyze this Wazuh security alert and provide a detailed explanation:\n\n${alertJson}\n\nProvide: 1) What happened, 2) Severity assessment, 3) MITRE ATT&CK mapping, 4) Immediate actions required.`,
+      content: `Analyze this Wazuh security alert and provide a detailed explanation:\n\n${alertJson}\n\nProvide: 1) What happened, 2) Severity assessment, 3) MITRE ATT&CK mapping, 4) Immediate actions, 5) Investigation steps`,
     },
   ];
 
@@ -89,7 +89,7 @@ export async function generateIncidentSummary(incidentData: string): Promise<str
   const messages: OllamaMessage[] = [
     {
       role: 'user',
-      content: `Generate a professional incident summary report for the following security incident data:\n\n${incidentData}\n\nInclude: Executive Summary, Timeline, Impact Assessment, Root Cause, and Remediation Steps.`,
+      content: `Generate a professional incident summary report for the following security incident data:\n\n${incidentData}\n\nInclude: Executive Summary, Timeline, Impact Assessment, Root Cause Analysis`,
     },
   ];
 
@@ -104,7 +104,7 @@ export async function translateToQuery(naturalLanguage: string): Promise<string>
   const messages: OllamaMessage[] = [
     {
       role: 'user',
-      content: `Translate this natural language query into a Wazuh API query string (q parameter format):\n\nQuery: "${naturalLanguage}"\n\nReturn ONLY the query string, nothing else. Example format: rule.level>=10 AND agent.name=web-server`,
+      content: `Translate this natural language query into a Wazuh API query string (q parameter format):\n\nQuery: "${naturalLanguage}"\n\nReturn ONLY the query string, nothing else.`,
     },
   ];
 
