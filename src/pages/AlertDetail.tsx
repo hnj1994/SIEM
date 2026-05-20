@@ -36,7 +36,7 @@ export default function AlertDetail() {
       const explanation = await explainAlert(JSON.stringify(alert, null, 2));
       setAiExplanation(explanation);
     } catch {
-      setAiExplanation('Unable to connect to Ollama AI. Please check your Ollama server configuration.');
+      setAiExplanation('⚠️ Unable to connect to Ollama AI server at http://4.188.228.167:11434. Please check your Ollama server configuration and ensure it is accessible.');
     }
     setLoadingAi(false);
   };
