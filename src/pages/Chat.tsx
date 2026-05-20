@@ -67,7 +67,7 @@ export default function Chat() {
     } catch (err: unknown) {
       const error = err as Error;
       if (error.name !== 'AbortError') {
-        updateLastMessage('⚠️ Unable to connect to Ollama. Make sure your Ollama server is running at `http://10.0.0.4:11434`.\n\nIn demo mode, I can still help with general security questions using my training data.');
+        updateLastMessage('⚠️ Unable to connect to Ollama. Make sure your Ollama server is running at `http://4.188.228.167:11434`.\n\nPlease ensure:\n1. Ollama service is running\n2. Network connectivity is available\n3. Firewall allows traffic to port 11434\n\nIn demo mode, I can still help with general security questions.');
       }
     } finally {
       setLoading(false);
@@ -113,7 +113,7 @@ export default function Chat() {
             <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>
               {alerts.length} alerts loaded<br />
               Model: llama3<br />
-              Server: 10.0.0.4:11434
+              Server: 4.188.228.167:11434
             </div>
           </div>
 
